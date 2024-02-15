@@ -122,13 +122,11 @@ public enum ReceiptParser {
     }
     
     enum Error: Swift.Error, LocalizedError {
-        case base64Decode
         case contentTypeMismatch
         case missingValue(String)
         
         var errorDescription: String? {
             switch self {
-            case .base64Decode: "Unable to base64 decode receipt data"
             case .contentTypeMismatch: "Receipt structure is not PKCS7 signed data"
             case .missingValue(let string): "Unable to decode field \(string)"
             }

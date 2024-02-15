@@ -27,10 +27,7 @@ public struct Receipt {
 
 public enum ReceiptParser {
     public static func parse(from data: Data) throws -> Receipt {
-        guard let base64 = Data(base64Encoded: data) else {
-            throw Error.base64Decode
-        }
-        let decodedCMSContentInfo = Array(base64)
+        let decodedCMSContentInfo = Array(data)
         let result = try DER.parse(decodedCMSContentInfo)
         let cmsContentInfo = try CMSContentInfo(derEncoded: result)
         

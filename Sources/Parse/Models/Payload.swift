@@ -1,3 +1,6 @@
+// Payload.swift
+// Copyright (c) 2024 hiimtmac inc.
+
 import Foundation
 import SwiftASN1
 
@@ -20,31 +23,31 @@ extension Payload {
     var bundleIdentifier: String? {
         get throws { try attributes.bundleIdentifier }
     }
-    
+
     var appVersion: String? {
         get throws { try attributes.appVersion }
     }
-    
+
     var opaqueValue: ArraySlice<UInt8>? {
         get throws { try attributes.opaqueValue }
     }
-    
+
     var sha1Hash: String? {
         get throws { try attributes.sha1Hash }
     }
-    
+
     var inAppPurchaseReceipts: [InAppPurchaseReceipt]? {
         get throws { try attributes.inAppPurchaseReceipts }
     }
-    
+
     var originalApplicationVersion: String? {
         get throws { try attributes.originalApplicationVersion }
     }
-    
+
     var receiptCreationDate: Date? {
         get throws { try attributes.receiptCreationDate }
     }
-    
+
     var receiptExpirationDate: Date? {
         get throws { try attributes.receiptExpirationDate }
     }
@@ -83,7 +86,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var appVersion: String? {
         get throws {
@@ -94,7 +97,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var opaqueValue: ArraySlice<UInt8>? {
         get throws {
@@ -104,7 +107,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var sha1Hash: String? {
         get throws {
@@ -116,7 +119,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var inAppPurchaseReceipts: [InAppPurchaseReceipt]? {
         get throws {
@@ -125,7 +128,7 @@ extension Array where Element == Attribute {
             return try contents.map(InAppPurchaseReceipt.init)
         }
     }
-    
+
     @inlinable
     var originalApplicationVersion: String? {
         get throws {
@@ -136,7 +139,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var receiptCreationDate: Date? {
         get throws {
@@ -148,7 +151,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var receiptExpirationDate: Date? {
         get throws {

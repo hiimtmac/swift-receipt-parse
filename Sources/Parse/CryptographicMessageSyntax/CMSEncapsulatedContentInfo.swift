@@ -1,3 +1,6 @@
+// CMSEncapsulatedContentInfo.swift
+// Copyright (c) 2024 hiimtmac inc.
+
 import SwiftASN1
 
 /// ``CMSEncapsulatedContentInfo`` is defined in ASN.1 as:
@@ -8,15 +11,15 @@ import SwiftASN1
 /// ContentType ::= OBJECT IDENTIFIER
 /// ```
 @usableFromInline
-struct CMSEncapsulatedContentInfo: DERParseable {
+struct CMSEncapsulatedContentInfo: DERParseable, Hashable {
     @usableFromInline
     var eContentType: ASN1ObjectIdentifier
 
     @usableFromInline
-    var eContent: ASN1OctetString
+    var eContent: ASN1OctetString?
 
     @inlinable
-    init(eContentType: ASN1ObjectIdentifier, eContent: ASN1OctetString) {
+    init(eContentType: ASN1ObjectIdentifier, eContent: ASN1OctetString? = nil) {
         self.eContentType = eContentType
         self.eContent = eContent
     }
@@ -25,7 +28,7 @@ struct CMSEncapsulatedContentInfo: DERParseable {
     init(derEncoded rootNode: ASN1Node) throws {
         self = try DER.sequence(rootNode, identifier: .sequence) { nodes in
             let eContentType = try ASN1ObjectIdentifier(derEncoded: &nodes)
-            let eContent = try DER.explicitlyTagged(&nodes, tagNumber: 0, tagClass: .contextSpecific) { node in
+            let eContent = try DER.optionalExplicitlyTagged(&nodes, tagNumber: 0, tagClass: .contextSpecific) { node in
                 try ASN1OctetString(derEncoded: node)
             }
 

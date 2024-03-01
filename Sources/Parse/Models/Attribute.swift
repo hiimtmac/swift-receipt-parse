@@ -1,3 +1,6 @@
+// Attribute.swift
+// Copyright (c) 2024 hiimtmac inc.
+
 import Foundation
 import SwiftASN1
 
@@ -5,7 +8,7 @@ import SwiftASN1
 struct Attribute: DERParseable {
     @usableFromInline
     var type: Int
-    
+
     @usableFromInline
     var version: Int
 
@@ -22,14 +25,14 @@ struct Attribute: DERParseable {
         self.version = version
         self.value = value
     }
-    
+
     @inlinable
     init(derEncoded rootNode: ASN1Node) throws {
         self = try DER.sequence(rootNode, identifier: .sequence) { nodes in
             let type = try Int(derEncoded: &nodes)
             let version = try Int(derEncoded: &nodes)
             let value = try ASN1OctetString(derEncoded: &nodes)
-            
+
             return .init(type: type, version: version, value: value)
         }
     }
@@ -43,7 +46,7 @@ extension Array where Element == Attribute {
         }
         return nil
     }
-    
+
     @inlinable
     subscript(all type: Int) -> [Attribute] {
         self.filter { $0.type == type }

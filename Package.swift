@@ -13,14 +13,15 @@ let package = Package(
         .library(name: "ReceiptParse", targets: ["Parse"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-asn1.git", from: "1.1.0")
+        .package(url: "https://github.com/apple/swift-certificates.git", from: "1.2.0")
     ],
     targets: [
         .target(
             name: "Parse",
             dependencies: [
-                .product(name: "SwiftASN1", package: "swift-asn1")
-            ]
+                .product(name: "X509", package: "swift-certificates")
+            ],
+            resources: [.process("Resources")]
         ),
         .testTarget(
             name: "ParseTests",
@@ -28,6 +29,6 @@ let package = Package(
                 .target(name: "Parse")
             ],
             resources: [.process("Resources")]
-        ),
+        )
     ]
 )

@@ -1,3 +1,6 @@
+// InAppPurchaseReceipt.swift
+// Copyright (c) 2024 hiimtmac inc.
+
 import Foundation
 import SwiftASN1
 
@@ -5,7 +8,7 @@ import SwiftASN1
 struct InAppPurchaseReceipt: DERParseable {
     @usableFromInline
     var attributes: [Attribute]
-    
+
     @inlinable
     init(derEncoded rootNode: ASN1Node) throws {
         self.attributes = try DER.set(
@@ -20,39 +23,39 @@ extension InAppPurchaseReceipt {
     var quantity: Int? {
         get throws { try attributes.quantity }
     }
-    
+
     var productIdentifier: String? {
         get throws { try attributes.productIdentifier }
     }
-    
+
     var transactionIdentifier: String? {
         get throws { try attributes.transactionIdentifier }
     }
-    
+
     var originalTransactionIdentifier: String? {
         get throws { try attributes.originalTransactionIdentifier }
     }
-    
+
     var purchaseDate: Date? {
         get throws { try attributes.purchaseDate }
     }
-    
+
     var originalPurchaseDate: Date? {
         get throws { try attributes.originalPurchaseDate }
     }
-    
+
     var subscriptionExpirationDate: Date? {
         get throws { try attributes.subscriptionExpirationDate }
     }
-    
+
     var subscriptionIntroductoryPricePeriod: Int? {
         get throws { try attributes.subscriptionIntroductoryPricePeriod }
     }
-    
+
     var cancellationDate: Date? {
         get throws { try attributes.cancellationDate }
     }
-    
+
     var webOrderLineItemID: Int? {
         get throws { try attributes.webOrderLineItemID }
     }
@@ -91,7 +94,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var productIdentifier: String? {
         get throws {
@@ -102,7 +105,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var transactionIdentifier: String? {
         get throws {
@@ -113,7 +116,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var originalTransactionIdentifier: String? {
         get throws {
@@ -124,7 +127,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var purchaseDate: Date? {
         get throws {
@@ -136,7 +139,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var originalPurchaseDate: Date? {
         get throws {
@@ -148,7 +151,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var subscriptionExpirationDate: Date? {
         get throws {
@@ -160,7 +163,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var subscriptionIntroductoryPricePeriod: Int? {
         get throws {
@@ -170,7 +173,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var cancellationDate: Date? {
         get throws {
@@ -182,7 +185,7 @@ extension Array where Element == Attribute {
             return nil
         }
     }
-    
+
     @inlinable
     var webOrderLineItemID: Int? {
         get throws {

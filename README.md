@@ -1,10 +1,10 @@
 # swift-receipt-parse
 
-A library for parsing apple receipts
+A library for parsing & validating apple receipts
 
 ## Overview
 
-This library helps to parse PKCS7 receipt data from Apple in its ASN1 form using only swift (no openssl needed). Some CMS structures copied from [swift-certificates](https://github.com/apple/swift-certificates) as there is non-public API. Right now no signature validation occurs and the signature and certificates are ignored.
+This library helps to parse PKCS7 receipt data from Apple in its ASN1 form using only swift (no openssl needed). Some CMS structures copied from [swift-certificates](https://github.com/apple/swift-certificates) as they are non-public API.
 
 ## Getting Started
 

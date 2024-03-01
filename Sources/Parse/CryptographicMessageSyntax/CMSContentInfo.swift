@@ -1,3 +1,6 @@
+// CMSContentInfo.swift
+// Copyright (c) 2024 hiimtmac inc.
+
 import SwiftASN1
 
 extension ASN1ObjectIdentifier {
@@ -9,7 +12,7 @@ extension ASN1ObjectIdentifier {
     ///    us(840) rsadsi(113549) pkcs(1) pkcs7(7) 2 }
     /// ```
     @usableFromInline
-    static let cmsSignedData: ASN1ObjectIdentifier = [1, 2, 840, 113549, 1, 7, 2]
+    static let cmsSignedData: ASN1ObjectIdentifier = [1, 2, 840, 113_549, 1, 7, 2]
 }
 
 /// ``ContentInfo`` is defined in ASN.1 as:
@@ -20,19 +23,19 @@ extension ASN1ObjectIdentifier {
 /// ContentType ::= OBJECT IDENTIFIER
 /// ```
 @usableFromInline
-struct CMSContentInfo: DERParseable {
+struct CMSContentInfo: DERParseable, Hashable {
     @usableFromInline
     var contentType: ASN1ObjectIdentifier
-    
+
     @usableFromInline
     var content: ASN1Any
-    
+
     @inlinable
     init(contentType: ASN1ObjectIdentifier, content: ASN1Any) {
         self.contentType = contentType
         self.content = content
     }
-    
+
     @inlinable
     init(derEncoded rootNode: ASN1Node) throws {
         self = try DER.sequence(rootNode, identifier: .sequence) { nodes in

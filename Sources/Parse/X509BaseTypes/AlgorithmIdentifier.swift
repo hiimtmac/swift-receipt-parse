@@ -4,7 +4,7 @@
 import SwiftASN1
 
 @usableFromInline
-package struct AlgorithmIdentifier: DERParseable, Hashable {
+package struct AlgorithmIdentifier: DERParseable, Hashable, Sendable {
     @usableFromInline
     var algorithm: ASN1ObjectIdentifier
 

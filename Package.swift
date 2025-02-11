@@ -13,7 +13,7 @@ let package = Package(
         .library(name: "ReceiptParse", targets: ["Parse"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-certificates.git", from: "1.2.0")
+        .package(url: "https://github.com/apple/swift-certificates.git", from: "1.7.0")
     ],
     targets: [
         .target(

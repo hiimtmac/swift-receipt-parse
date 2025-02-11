@@ -3,6 +3,8 @@
 
 import SwiftASN1
 
+// https://github.com/apple/swift-certificates/blob/197ba89b062c6dfb2770aebde741b76572d5bc71/Sources/X509/CryptographicMessageSyntax/CMSVersion.swift
+
 /// ``CMPVersion`` is defined in ASN1. as:
 /// ```
 ///  CMSVersion ::= INTEGER

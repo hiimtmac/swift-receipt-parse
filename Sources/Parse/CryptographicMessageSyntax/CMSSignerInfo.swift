@@ -4,6 +4,8 @@
 import Foundation
 import SwiftASN1
 
+// https://github.com/apple/swift-certificates/blob/197ba89b062c6dfb2770aebde741b76572d5bc71/Sources/X509/CryptographicMessageSyntax/CMSSignerInfo.swift
+
 /// ``CMSSignerInfo`` is defined in ASN.1 as:
 /// ```
 /// SignerInfo ::= SEQUENCE {

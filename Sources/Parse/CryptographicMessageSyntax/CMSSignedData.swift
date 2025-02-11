@@ -4,6 +4,8 @@
 import SwiftASN1
 import X509
 
+// https://github.com/apple/swift-certificates/blob/197ba89b062c6dfb2770aebde741b76572d5bc71/Sources/X509/CryptographicMessageSyntax/CMSSignedData.swift
+
 /// ``SignedData`` is defined in ASN.1 as:
 /// ```
 /// SignedData ::= SEQUENCE {

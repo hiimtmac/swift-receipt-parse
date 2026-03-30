@@ -1,7 +1,9 @@
 // VerifyTrust.swift
 // Copyright (c) 2026 hiimtmac inc.
 
-import Foundation
+import struct Foundation.Data
+import struct Foundation.Date
+import class Foundation.Bundle
 import SwiftASN1
 @_spi(FixedExpiryValidationTime) import X509
 

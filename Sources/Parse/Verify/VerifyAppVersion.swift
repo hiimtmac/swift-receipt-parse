@@ -1,7 +1,7 @@
 // VerifyAppVersion.swift
 // Copyright (c) 2026 hiimtmac inc.
 
-import Foundation
+import class Foundation.Bundle
 
 extension ReceiptValidator {
     // This corresponds to the value of CFBundleVersion (in iOS) or CFBundleShortVersionString (in macOS) in the Info.plist.

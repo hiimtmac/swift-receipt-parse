@@ -1,0 +1,42 @@
+{
+  "name": "swift-receipt-parse",
+  "image": "swift:6.2",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": "false",
+      "username": "vscode",
+      // "userUid": "1000",
+      // "userGid": "1000",
+      "upgradePackages": "false"
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "os-provided",
+      "ppa": "false"
+    },
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+  },
+  "runArgs": ["--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "lldb.library": "/usr/lib/liblldb.so"
+      },
+      "extensions": ["swiftlang.swift-vscode", "anthropic.claude-code"]
+    }
+  },
+
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
+  "workspaceFolder": "/workspace",
+  "mounts": [
+    "source=claude-code-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
+    "source=claude-code-config-${devcontainerId},target=/root/.claude,type=volume",
+    "target=/workspace/.build,type=volume",
+    "target=/workspace/.swiftpm,type=volume"
+  ],
+
+  "remoteUser": "root",
+  "containerEnv": {
+    "CLAUDE_CONFIG_DIR": "/root/.claude"
+  }
+}

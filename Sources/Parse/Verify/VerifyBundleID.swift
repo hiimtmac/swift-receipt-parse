@@ -1,7 +1,7 @@
 // VerifyBundleID.swift
 // Copyright (c) 2026 hiimtmac inc.
 
-import Foundation
+import class Foundation.Bundle
 
 extension ReceiptValidator {
     static func verifyBundleIdentifier(id: String) throws {

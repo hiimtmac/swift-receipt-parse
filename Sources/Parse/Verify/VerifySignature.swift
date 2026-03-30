@@ -2,8 +2,6 @@
 // Copyright (c) 2026 hiimtmac inc.
 
 import _CryptoExtras
-import Crypto
-import Foundation
 import X509
 
 extension ReceiptValidator {

@@ -1,7 +1,6 @@
 // VerifySHA1.swift
 // Copyright (c) 2026 hiimtmac inc.
 
-import Foundation
 #if canImport(UIKit)
 import UIKit
 #endif

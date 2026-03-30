@@ -1,6 +1,7 @@
 // VerifyTrust.swift
 // Copyright (c) 2026 hiimtmac inc.
 
+#if Verification
 import struct Foundation.Data
 import struct Foundation.Date
 import class Foundation.Bundle
@@ -42,3 +43,4 @@ extension ReceiptValidator {
         }
     }
 }
+#endif

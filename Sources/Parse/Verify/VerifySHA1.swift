@@ -1,6 +1,7 @@
 // VerifySHA1.swift
 // Copyright (c) 2026 hiimtmac inc.
 
+#if Verification
 #if canImport(UIKit)
 import UIKit
 #endif
@@ -34,3 +35,4 @@ extension ReceiptValidator {
         #endif
     }
 }
+#endif

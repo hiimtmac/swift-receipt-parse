@@ -2,7 +2,9 @@
 // Copyright (c) 2026 hiimtmac inc.
 
 public import SwiftASN1
+#if Verification
 public import X509
+#endif
 
 // https://github.com/apple/swift-certificates/blob/197ba89b062c6dfb2770aebde741b76572d5bc71/Sources/X509/CryptographicMessageSyntax/CMSSignedData.swift
 
@@ -44,6 +46,7 @@ struct CMSSignedData: DERParseable, Hashable {
     @usableFromInline
     var encapContentInfo: CMSEncapsulatedContentInfo
 
+    #if Verification
     @usableFromInline
     var certificates: [Certificate]?
 
@@ -64,6 +67,20 @@ struct CMSSignedData: DERParseable, Hashable {
         self.certificates = certificates
         self.signerInfos = signerInfos
     }
+    
+    #else
+    
+    @inlinable
+    init(
+        version: CMSVersion,
+        digestAlgorithms: [AlgorithmIdentifier],
+        encapContentInfo: CMSEncapsulatedContentInfo
+    ) {
+        self.version = version
+        self.digestAlgorithms = digestAlgorithms
+        self.encapContentInfo = encapContentInfo
+    }
+    #endif
 
     @inlinable
     init(derEncoded: ASN1Node) throws {
@@ -74,6 +91,7 @@ struct CMSSignedData: DERParseable, Hashable {
 
             let encapContentInfo = try CMSEncapsulatedContentInfo(derEncoded: &nodes)
 
+            #if Verification
             let certificates = try DER.optionalImplicitlyTagged(&nodes, tagNumber: 0, tagClass: .contextSpecific) {
                 node in
                 try DER._set(
@@ -82,13 +100,20 @@ struct CMSSignedData: DERParseable, Hashable {
                     rootNode: node
                 )
             }
+            #else
+            _ = DER.optionalImplicitlyTagged(&nodes, tagNumber: 0, tagClass: .contextSpecific) { _ in }
+            #endif
 
             // we need to skip this node even though we don't support it (crls)
             _ = DER.optionalImplicitlyTagged(&nodes, tagNumber: 1, tagClass: .contextSpecific) { _ in }
 
-            // we need to skip this node even though we don't support it (signer infos)
+            #if Verification
             let signerInfos = try DER.set(of: CMSSignerInfo.self, identifier: .set, nodes: &nodes)
+            #else
+            _ = try ASN1Any(derEncoded: &nodes)
+            #endif
 
+            #if Verification
             return .init(
                 version: version,
                 digestAlgorithms: digestAlgorithms,
@@ -96,6 +121,13 @@ struct CMSSignedData: DERParseable, Hashable {
                 certificates: certificates,
                 signerInfos: signerInfos
             )
+            #else
+            return .init(
+                version: version,
+                digestAlgorithms: digestAlgorithms,
+                encapContentInfo: encapContentInfo
+            )
+            #endif
         }
     }
 }

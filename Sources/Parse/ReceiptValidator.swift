@@ -1,6 +1,7 @@
 // ReceiptValidator.swift
 // Copyright (c) 2026 hiimtmac inc.
 
+#if Verification
 public import struct Foundation.Date
 public import protocol Foundation.LocalizedError
 public import SwiftASN1
@@ -124,3 +125,4 @@ extension Array where Element == Certificate {
         }
     }
 }
+#endif

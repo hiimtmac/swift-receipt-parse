@@ -1,6 +1,7 @@
 // ValidateTests.swift
 // Copyright (c) 2026 hiimtmac inc.
 
+#if Verification
 import Foundation
 import Testing
 @testable import Parse
@@ -21,3 +22,4 @@ struct ValidationTests {
         )
     }
 }
+#endif

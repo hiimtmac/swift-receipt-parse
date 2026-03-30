@@ -1,6 +1,7 @@
 // VerifyAppVersion.swift
 // Copyright (c) 2026 hiimtmac inc.
 
+#if Verification
 import class Foundation.Bundle
 
 extension ReceiptValidator {
@@ -19,3 +20,4 @@ extension ReceiptValidator {
         #endif
     }
 }
+#endif

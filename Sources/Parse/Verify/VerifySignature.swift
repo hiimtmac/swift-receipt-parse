@@ -1,6 +1,7 @@
 // VerifySignature.swift
 // Copyright (c) 2026 hiimtmac inc.
 
+#if Verification
 import _CryptoExtras
 import X509
 
@@ -22,3 +23,4 @@ extension ReceiptValidator {
         }
     }
 }
+#endif

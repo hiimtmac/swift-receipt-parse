@@ -1,6 +1,7 @@
 // CMSIssuerAndSerialNumber.swift
 // Copyright (c) 2026 hiimtmac inc.
 
+#if Verification
 public import SwiftASN1
 public import X509
 
@@ -53,3 +54,4 @@ struct CMSIssuerAndSerialNumber: DERParseable, Hashable {
         }
     }
 }
+#endif

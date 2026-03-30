@@ -23,14 +23,23 @@ let package = Package(
     products: [
         .library(name: "ReceiptParse", targets: ["Parse"]),
     ],
+    traits: [
+        .trait(name: "Verification", description: "Perform certificate verification"),
+        .default(enabledTraits: ["Verification"])
+    ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-certificates.git", from: "1.18.0")
+        .package(url: "https://github.com/apple/swift-certificates.git", from: "1.18.0"),
+        .package(url: "https://github.com/apple/swift-crypto.git", from: "4.3.0"),
+        .package(url: "https://github.com/apple/swift-asn1.git", from: "1.6.0"),
     ],
     targets: [
         .target(
             name: "Parse",
             dependencies: [
-                .product(name: "X509", package: "swift-certificates")
+                .product(name: "X509", package: "swift-certificates", condition: .when(traits: ["Verification"])),
+                .product(name: "Crypto", package: "swift-crypto", condition: .when(traits: ["Verification"])),
+                .product(name: "_CryptoExtras", package: "swift-crypto", condition: .when(traits: ["Verification"])),
+                .product(name: "SwiftASN1", package: "swift-asn1")
             ],
             resources: [.process("Resources")],
             swiftSettings: swiftSettings

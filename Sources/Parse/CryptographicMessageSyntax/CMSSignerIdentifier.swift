@@ -1,6 +1,7 @@
 // CMSSignerIdentifier.swift
 // Copyright (c) 2026 hiimtmac inc.
 
+#if Verification
 public import SwiftASN1
 public import X509
 
@@ -45,3 +46,4 @@ enum CMSSignerIdentifier: DERParseable, Hashable {
         self = .issuerAndSerialNumber(.init(issuer: certificate.issuer, serialNumber: certificate.serialNumber))
     }
 }
+#endif

@@ -1,8 +1,8 @@
 // InAppPurchaseReceipt.swift
-// Copyright (c) 2024 hiimtmac inc.
+// Copyright (c) 2026 hiimtmac inc.
 
-import Foundation
-import SwiftASN1
+public import struct Foundation.Date
+public import SwiftASN1
 
 @usableFromInline
 struct InAppPurchaseReceipt: DERParseable {
@@ -132,9 +132,7 @@ extension Array where Element == Attribute {
     var purchaseDate: Date? {
         get throws {
             if let attr = self[.purchaseDate] {
-                let ia5 = try ASN1IA5String(derEncoded: attr.value.bytes)
-                let string = String(ia5)
-                return DateFormatter.rfc3339.date(from: string)
+                return try Date(attr)
             }
             return nil
         }
@@ -144,9 +142,7 @@ extension Array where Element == Attribute {
     var originalPurchaseDate: Date? {
         get throws {
             if let attr = self[.originalPurchaseDate] {
-                let ia5 = try ASN1IA5String(derEncoded: attr.value.bytes)
-                let string = String(ia5)
-                return DateFormatter.rfc3339.date(from: string)
+                return try Date(attr)
             }
             return nil
         }
@@ -156,9 +152,7 @@ extension Array where Element == Attribute {
     var subscriptionExpirationDate: Date? {
         get throws {
             if let attr = self[.subscriptionExpirationDate] {
-                let ia5 = try ASN1IA5String(derEncoded: attr.value.bytes)
-                let string = String(ia5)
-                return DateFormatter.rfc3339.date(from: string)
+                return try Date(attr)
             }
             return nil
         }
@@ -178,9 +172,7 @@ extension Array where Element == Attribute {
     var cancellationDate: Date? {
         get throws {
             if let attr = self[.cancellationDate] {
-                let ia5 = try ASN1IA5String(derEncoded: attr.value.bytes)
-                let string = String(ia5)
-                return DateFormatter.rfc3339.date(from: string)
+                return try Date(attr)
             }
             return nil
         }

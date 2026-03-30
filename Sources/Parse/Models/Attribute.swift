@@ -1,8 +1,7 @@
 // Attribute.swift
-// Copyright (c) 2024 hiimtmac inc.
+// Copyright (c) 2026 hiimtmac inc.
 
-import Foundation
-import SwiftASN1
+public import SwiftASN1
 
 @usableFromInline
 struct Attribute: DERParseable {
@@ -51,14 +50,4 @@ extension Array where Element == Attribute {
     subscript(all type: Int) -> [Attribute] {
         self.filter { $0.type == type }
     }
-}
-
-extension DateFormatter {
-    @usableFromInline
-    static let rfc3339: DateFormatter = {
-        let f = DateFormatter()
-        f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        f.timeZone = .init(abbreviation: "UTC")
-        return f
-    }()
 }

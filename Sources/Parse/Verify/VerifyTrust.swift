@@ -1,8 +1,9 @@
 // VerifyTrust.swift
-// Copyright (c) 2024 hiimtmac inc.
+// Copyright (c) 2026 hiimtmac inc.
 
 import Foundation
-import X509
+import SwiftASN1
+@_spi(FixedExpiryValidationTime) import X509
 
 extension ReceiptValidator {
     static func verifyTrust(
@@ -21,17 +22,17 @@ extension ReceiptValidator {
         let untrustedIntermediates = CertificateStore(intermediateCertificates)
 
         var verifier = Verifier(rootCertificates: trustRoots) {
-            RFC5280Policy(validationTime: creationDate)
+            RFC5280Policy(fixedExpiryValidationTime: creationDate)
         }
 
         let result = await verifier.validate(
-            leafCertificate: signingCertificate,
+            leaf: signingCertificate,
             intermediates: untrustedIntermediates
         )
 
         switch result {
         case .validCertificate: break
-        case .couldNotValidate(let policyFailures):
+        case let .couldNotValidate(policyFailures):
             let reasons = policyFailures
                 .map(\.policyFailureReason.description)
                 .joined(separator: ", ")

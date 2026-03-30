@@ -1,7 +1,7 @@
 // Receipt.swift
-// Copyright (c) 2024 hiimtmac inc.
+// Copyright (c) 2026 hiimtmac inc.
 
-import Foundation
+public import struct Foundation.Date
 
 public struct Receipt {
     public let bundleIdentifier: String

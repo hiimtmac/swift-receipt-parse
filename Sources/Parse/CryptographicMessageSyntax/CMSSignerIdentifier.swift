@@ -1,8 +1,8 @@
 // CMSSignerIdentifier.swift
-// Copyright (c) 2024 hiimtmac inc.
+// Copyright (c) 2026 hiimtmac inc.
 
-import SwiftASN1
-import X509
+public import SwiftASN1
+public import X509
 
 // https://github.com/apple/swift-certificates/blob/197ba89b062c6dfb2770aebde741b76572d5bc71/Sources/X509/CryptographicMessageSyntax/CMSSignerIdentifier.swift
 

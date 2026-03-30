@@ -1,8 +1,9 @@
 // ReceiptValidator.swift
-// Copyright (c) 2024 hiimtmac inc.
+// Copyright (c) 2026 hiimtmac inc.
 
-import Foundation
-import SwiftASN1
+public import struct Foundation.Date
+public import protocol Foundation.LocalizedError
+public import SwiftASN1
 import X509
 
 extension ASN1ObjectIdentifier {
@@ -23,7 +24,7 @@ public enum ReceiptValidator {
         bundleIdentifier: String,
         appVersion: String,
         sha1Hash: String,
-        data: Data
+        data: [UInt8]
     ) async throws {
         try await verifyTrustChain(
             data: data,
@@ -31,16 +32,15 @@ public enum ReceiptValidator {
         )
         try verifyBundleIdentifier(id: bundleIdentifier)
         try verifyVersionIdentifier(version: appVersion)
-        try verifySHA1Hash(sha: sha1Hash)
+        try await verifySHA1Hash(sha: sha1Hash)
     }
 
     // https://developer.apple.com/documentation/appstorereceipts/validating_receipts_on_the_device#4180978
     static func verifyTrustChain(
-        data: Data,
+        data: [UInt8],
         creationDate: Date
     ) async throws {
-        let decodedCMSContentInfo = Array(data)
-        let derParse = try DER.parse(decodedCMSContentInfo)
+        let derParse = try DER.parse(data)
         let cmsContentInfo = try CMSContentInfo(derEncoded: derParse)
         let signedData = try CMSSignedData(asn1Any: cmsContentInfo.content)
 
@@ -52,7 +52,7 @@ public enum ReceiptValidator {
             throw Error.signature("Too many signatures")
         }
 
-        guard 
+        guard
             signedData.encapContentInfo.eContentType == .cmsData,
             signedData.signerInfos.allSatisfy({ $0.version == .v1 })
         else {

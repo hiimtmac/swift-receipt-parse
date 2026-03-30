@@ -1,13 +1,14 @@
 // ReceiptParser.swift
-// Copyright (c) 2024 hiimtmac inc.
+// Copyright (c) 2026 hiimtmac inc.
 
-import Foundation
+import protocol Foundation.LocalizedError
 import SwiftASN1
 
 public enum ReceiptParser {
-    public static func parse(from data: Data) throws -> Receipt {
-        let decodedCMSContentInfo = Array(data)
-        let result = try DER.parse(decodedCMSContentInfo)
+    public static func parse(
+        from data: [UInt8]
+    ) throws -> Receipt {
+        let result = try DER.parse(data)
         let cmsContentInfo = try CMSContentInfo(derEncoded: result)
 
         guard cmsContentInfo.contentType == .cmsSignedData else {

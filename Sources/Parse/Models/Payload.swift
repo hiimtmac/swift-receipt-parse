@@ -1,8 +1,8 @@
 // Payload.swift
-// Copyright (c) 2024 hiimtmac inc.
+// Copyright (c) 2026 hiimtmac inc.
 
-import Foundation
-import SwiftASN1
+public import struct Foundation.Date
+public import SwiftASN1
 
 @usableFromInline
 struct Payload: DERParseable {
@@ -144,9 +144,7 @@ extension Array where Element == Attribute {
     var receiptCreationDate: Date? {
         get throws {
             if let attr = self[.receiptCreationDate] {
-                let ia5 = try ASN1IA5String(derEncoded: attr.value.bytes)
-                let string = String(ia5)
-                return DateFormatter.rfc3339.date(from: string)
+                return try Date(attr)
             }
             return nil
         }
@@ -156,9 +154,7 @@ extension Array where Element == Attribute {
     var receiptExpirationDate: Date? {
         get throws {
             if let attr = self[.receiptExpirationDate] {
-                let ia5 = try ASN1IA5String(derEncoded: attr.value.bytes)
-                let string = String(ia5)
-                return DateFormatter.rfc3339.date(from: string)
+                return try Date(attr)
             }
             return nil
         }

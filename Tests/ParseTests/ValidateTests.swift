@@ -1,6 +1,7 @@
 // ValidateTests.swift
-// Copyright (c) 2024 hiimtmac inc.
+// Copyright (c) 2026 hiimtmac inc.
 
+#if Verification
 import Foundation
 import Testing
 @testable import Parse
@@ -13,11 +14,12 @@ struct ValidationTests {
         let data = try Data(contentsOf: url)
         let base64 = Data(base64Encoded: data)!
 
-        let receipt = try ReceiptParser.parse(from: base64)
+        let receipt = try ReceiptParser.parse(from: Array(base64))
 
         try await ReceiptValidator.verifyTrustChain(
-            data: base64,
+            data: Array(base64),
             creationDate: receipt.receiptCreationDate
         )
     }
 }
+#endif

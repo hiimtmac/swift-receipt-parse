@@ -1,7 +1,7 @@
 // VerifySHA1.swift
-// Copyright (c) 2024 hiimtmac inc.
+// Copyright (c) 2026 hiimtmac inc.
 
-import Foundation
+#if Verification
 #if canImport(UIKit)
 import UIKit
 #endif
@@ -9,10 +9,10 @@ import Crypto
 
 extension ReceiptValidator {
     // https://developer.apple.com/documentation/appstorereceipts/validating_receipts_on_the_device#3744656
-    static func verifySHA1Hash(sha: String) throws {
+    static func verifySHA1Hash(sha: String) async throws {
         #if canImport(UIKit)
         guard
-            let vendorId = UIDevice.current.identifierForVendor
+            let vendorId = await UIDevice.current.identifierForVendor
         else {
             throw Error.sha1Hash
         }
@@ -35,3 +35,4 @@ extension ReceiptValidator {
         #endif
     }
 }
+#endif

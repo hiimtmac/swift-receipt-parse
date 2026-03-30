@@ -1,5 +1,5 @@
 // CMSVersion.swift
-// Copyright (c) 2024 hiimtmac inc.
+// Copyright (c) 2026 hiimtmac inc.
 
 import SwiftASN1
 

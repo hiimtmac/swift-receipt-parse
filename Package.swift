@@ -25,7 +25,7 @@ let package = Package(
     ],
     traits: [
         .trait(name: "Verification", description: "Perform certificate verification"),
-        .default(enabledTraits: ["Verification"])
+        .default(enabledTraits: [])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-certificates.git", from: "1.18.0"),

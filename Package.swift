@@ -17,7 +17,7 @@ let swiftSettings: [SwiftSetting] = [
 let package = Package(
     name: "swift-receipt-parse",
     platforms: [
-        .iOS(.v18),
+        .iOS(.v15),
         .macOS(.v15)
     ],
     products: [
